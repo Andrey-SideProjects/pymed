@@ -1,6 +1,7 @@
 import datetime
 import requests
 import itertools
+import re
 
 import xml.etree.ElementTree as xml
 
