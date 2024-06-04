@@ -172,7 +172,7 @@ class PubMed(object):
         )
 
         # Remove html markup tags (<b>, <i>, <sub>, <sup>) to prevent text truncation
-        response = re.sub('\n*<[/ ]*[a-z]{1,3}>\n*', '', str(response.text))
+        response = re.sub('\n*<[/ ]*[a-z]{1,3}>\n*', '', response)
 
         # Parse as XML
         root = xml.fromstring(response)
