@@ -171,7 +171,7 @@ class PubMed(object):
         )
 
         # Remove html markup tags (<b>, <i>, <sub>, <sup>) to prevent text truncation
-        response = re.sub("</?[bi]>|</?su[bp]>|</?mml:.+?>", "", response)
+        response = re.sub('<[/ ]*[a-z]{1,3}>', '', str(response.text))
 
         # Parse as XML
         root = xml.fromstring(response)
