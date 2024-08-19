@@ -21,7 +21,7 @@ class PubMed(object):
     """
 
     def __init__(
-        self: object, tool: str = "my_tool", email: str = "my_email@example.com"
+        self: object, tool: str = "my_tool", email: str = "my_email@example.com", debug: bool = False
     ) -> None:
         """ Initialization of the object.
 
@@ -39,6 +39,7 @@ class PubMed(object):
         # Store the input parameters
         self.tool = tool
         self.email = email
+        self.debug = debug
 
         # Keep track of the rate limit
         self._rateLimit = 3
@@ -139,6 +140,10 @@ class PubMed(object):
 
         # Make the request to PubMed
         response = requests.get(f"{BASE_URL}{url}", params=parameters)
+
+        # Show requests url if debug is True
+        if self.debug:
+            print(response.request.url)
 
         # Check for any errors
         response.raise_for_status()
