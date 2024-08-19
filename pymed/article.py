@@ -85,7 +85,7 @@ class PubMedArticle(object):
         return getContent(element=xml_element, path=path)
 
     def _extractDoi(self: object, xml_element: TypeVar("Element")) -> str:
-        path = ".//ArticleId[@IdType='doi']"
+        path = ".//ELocationID[@IdType='doi']"
         return getContent(element=xml_element, path=path)
 
     def _extractPublicationDate(
