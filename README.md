@@ -19,7 +19,7 @@ from pymed import PubMed
 pubmed = PubMed(tool="MyTool", email="my@email.address")
 results = pubmed.query("Some query", max_results=500)
 ```
-Or use API with API key [that can be obtained through personal account settings](https://support.nlm.nih.gov/knowledgebase/article/KA-05317/en-us) to increase rate limit from 3 requests per second to 10.
+Or use API with API key that can be obtained through [personal account settings](https://support.nlm.nih.gov/knowledgebase/article/KA-05317/en-us) to increase rate limit from 3 requests per second to 10.
 ```python
 from pymed import PubMed
 pubmed = PubMed(api_key="ABCD123")
