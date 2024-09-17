@@ -1,6 +1,4 @@
-> IMPORTANT NOTE: I don't have time to maintain this library (as some of you might have noticed). The PubMed API is a little chaotic, without a clear documentation and no single way of doing things, making it almost impossible to create a proper library. Feel free to create a fork or use the code for your own projects, however, I will archive this repository. Thanks to all contributers and users!
-
-# PyMed - PubMed Access through Python
+# Updated PyMed - PubMed Access through Python
 PyMed is a Python library that provides access to PubMed through the PubMed API.
 
 ## Why this library?
@@ -19,6 +17,12 @@ For full (working) examples have a look at the `examples/` folder in this reposi
 ```python
 from pymed import PubMed
 pubmed = PubMed(tool="MyTool", email="my@email.address")
+results = pubmed.query("Some query", max_results=500)
+```
+Or use API with API key [that can be obtained through personal account settings](https://support.nlm.nih.gov/knowledgebase/article/KA-05317/en-us) to increase rate limit from 3 requests per second to 10.
+```python
+from pymed import PubMed
+pubmed = PubMed(api_key="ABCD123")
 results = pubmed.query("Some query", max_results=500)
 ```
 
