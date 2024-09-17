@@ -74,7 +74,7 @@ class PubMed(object):
         articles = list(
             [
                 self._getArticles(article_ids=batch)
-                for batch in batches(article_ids, 500)
+                for batch in batches(article_ids, 400)
             ]
         )
 
