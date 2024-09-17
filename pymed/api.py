@@ -17,11 +17,10 @@ BASE_URL = "https://eutils.ncbi.nlm.nih.gov"
 
 
 class PubMed(object):
-    """ Wrapper around the PubMed API.
-    """
+    """ Wrapper around the PubMed API """
 
     def __init__(
-        self: object, tool: str = "my_tool", email: str = "my_email@example.com", debug: bool = False
+        self: object, tool: str = "my_tool", email: str = "my_email@example.com", api_key: str = None, debug: bool = False
     ) -> None:
         """ Initialization of the object.
 
@@ -31,6 +30,10 @@ class PubMed(object):
                             PMC (PubMed Central).
                 - email     String, email of the user of the tool. This parameter
                             is not required but kindly requested by PMC (PubMed Central).
+                - api_key   String that can be obtained through PubMed account settings
+                            and allows to send 10 requests per second instead of 3:
+                            https://support.nlm.nih.gov/knowledgebase/article/KA-05317/en-us
+                - debug     If True will show all urls for the requests
 
             Returns:
                 - None
@@ -40,13 +43,17 @@ class PubMed(object):
         self.tool = tool
         self.email = email
         self.debug = debug
+        self.api_key = api_key
 
         # Keep track of the rate limit
-        self._rateLimit = 3
+        self._rateLimit = 10 if self.api_key else 3
         self._requestsMade = []
 
         # Define the standard / default query parameters
-        self.parameters = {"tool": tool, "email": email, "db": "pubmed"}
+        if self.api_key:
+            self.parameters = {"api_key": api_key, "db": "pubmed"}
+        else:
+            self.parameters = {"tool": tool, "email": email, "db": "pubmed"}
 
     def query(self: object, query: str, max_results: int = 100):
         """ Method that executes a query agains the GraphQL schema, automatically
